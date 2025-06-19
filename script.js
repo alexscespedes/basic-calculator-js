@@ -112,3 +112,53 @@ backspaceButton.addEventListener("click", () => {
   }
   updateDisplay();
 });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key >= "0" && e.key <= "9") {
+    const numberButton = document.querySelector(`[data-number="${e.key}"]`);
+    if (numberButton) {
+      numberButton.click();
+    }
+  }
+
+  if (e.key === ".") {
+    const decimalButton = document.querySelector('[data-number="."]');
+    if (decimalButton) {
+      decimalButton.click();
+    }
+  }
+
+  if (e.key === "+" || e.key === "-") {
+    const operatorButton = document.querySelector(`[data-operator="${e.key}"]`);
+    if (operatorButton) {
+      operatorButton.click();
+    }
+  }
+
+  if (e.key === "*") {
+    const operatorButton = document.querySelector(`[data-operator="*"]`);
+    if (operatorButton) {
+      operatorButton.click();
+    }
+  }
+
+  if (e.key === "/") {
+    e.preventDefault();
+    const operatorButton = document.querySelector(`[data-operator="/"]`);
+    if (operatorButton) {
+      operatorButton.click();
+    }
+  }
+
+  if (e.key === "Enter") {
+    equalsButton.click();
+  }
+
+  if (e.key === "c" || e.key === "C") {
+    clearButton.click();
+  }
+
+  if (e.key === "Backspace") {
+    backspaceButton.click();
+  }
+});
