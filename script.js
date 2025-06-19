@@ -41,3 +41,12 @@ for (let i = 0; i < numberButtons.length; i++) {
     updateDisplay();
   });
 }
+
+clearButton.addEventListener("click", () => {
+  currentNumber = "0";
+  previousNumber = "";
+  operator = "";
+  shouldResetDisplay = false;
+
+  updateDisplay();
+});
