@@ -23,10 +23,21 @@ function updateDisplay() {
   }
 }
 
-/* NEED TO FIX
-// calculationDisplay.addEventListener("click", (e) => {
-//   for (let index = 0; index < numberButtons.length; index++) {
-//     currentNumber = e.dataset.number.toFixed();
-//   }
-// });
-*/
+for (let i = 0; i < numberButtons.length; i++) {
+  numberButtons[i].addEventListener("click", (e) => {
+    const number = e.target.dataset.number;
+
+    if (shouldResetDisplay) {
+      currentNumber = number;
+      shouldResetDisplay = false;
+    } else {
+      if (currentNumber === "0" && number !== ".") {
+        currentNumber = number;
+      } else {
+        currentNumber += number;
+      }
+    }
+
+    updateDisplay();
+  });
+}
