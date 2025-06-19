@@ -50,3 +50,65 @@ clearButton.addEventListener("click", () => {
 
   updateDisplay();
 });
+
+for (let i = 0; i < operatorButtons.length; i++) {
+  operatorButtons[i].addEventListener("click", (e) => {
+    const selectedOperator = e.target.dataset.operator;
+
+    if (previousNumber && operator && !shouldResetDisplay) {
+      calculate();
+    }
+    previousNumber = currentNumber;
+    operator = selectedOperator;
+    shouldResetDisplay = true;
+
+    updateDisplay();
+  });
+}
+
+function calculate() {
+  const prev = parseFloat(previousNumber);
+  const current = parseFloat(currentNumber);
+
+  if (isNaN(prev) || isNaN(current)) return;
+
+  let result;
+
+  switch (operator) {
+    case "+":
+      result = prev + current;
+      break;
+    case "-":
+      result = prev - current;
+      break;
+    case "*":
+      result = prev * current;
+      break;
+    case "/":
+      result = current === 0 ? "Error" : prev / current;
+      break;
+    default:
+      return;
+  }
+
+  currentNumber = result;
+  previousNumber = "";
+  operator = "";
+  shouldResetDisplay = true;
+}
+
+equalsButton.addEventListener("click", () => {
+  if (previousNumber && operator && currentNumber) {
+    calculate();
+    updateDisplay();
+  }
+});
+
+backspaceButton.addEventListener("click", () => {
+  if (currentNumber.length === 1 || currentNumber.length === 0) {
+    currentNumber = "0";
+  } else {
+    currentNumber = currentNumber.slice(0, -1);
+  }
+  updateDisplay();
+});
